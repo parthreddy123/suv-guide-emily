@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emily's SUV Shortlist - Mumbai 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+  :root {
+    --bg: #0c0c0c;
+    --card: #161621;
+    --card-hover: #1c1c30;
+    --accent: #c8a2ff;
+    --accent2: #7c5cbf;
+    --gold: #f0c674;
+    --rose: #e8788a;
+    --mint: #7ecba1;
+    --sky: #7eb8e8;
+    --text: #e8e8ed;
+    --muted: #8888a0;
+    --border: #2a2a3d;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 60px 20px 40px;
+    background: linear-gradient(135deg, #1a1028 0%, #0c0c0c 50%, #0f1a2a 100%);
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-label {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #e8e8ed, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero p {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 500px;
+    margin: 0 auto 20px;
+  }
+  .budget-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent2), #4a3a7a);
+    padding: 8px 24px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+  .deadline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--rose);
+    font-weight: 500;
+  }
+
+  /* Container */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+  /* Category sections */
+  .category {
+    margin: 40px 0;
+  }
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  .category-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .category h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  .category-rationale {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 20px;
+    padding-left: 58px;
+    line-height: 1.7;
+  }
+
+  /* Car cards */
+  .car-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .car-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px;
+    transition: all 0.2s;
+  }
+  .car-card:hover {
+    background: var(--card-hover);
+    border-color: var(--accent2);
+    transform: translateY(-2px);
+  }
+  .car-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .car-name {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .car-price {
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .car-year {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .car-desc {
+    font-size: 13.5px;
+    color: var(--muted);
+    margin: 10px 0 14px;
+    line-height: 1.65;
+  }
+  .car-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+    border: 1px solid;
+  }
+  .tag-pro { color: var(--mint); border-color: #2a4a3a; background: #1a2a22; }
+  .tag-con { color: var(--rose); border-color: #4a2a2a; background: #2a1a1a; }
+  .tag-info { color: var(--sky); border-color: #2a3a4a; background: #1a222a; }
+
+  .car-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .car-link {
+    font-size: 12px;
+    padding: 5px 14px;
+    border-radius: 8px;
+    background: #222238;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .car-link:hover { background: #2d2d48; }
+
+  /* Maintenance table */
+  .maint-section {
+    margin: 50px 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 24px;
+  }
+  .maint-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+  }
+  .maint-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .maint-table th {
+    text-align: left;
+    color: var(--muted);
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .maint-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #1e1e30;
+  }
+  .cost-low { color: var(--mint); }
+  .cost-med { color: var(--gold); }
+  .cost-high { color: var(--rose); }
+
+  /* Verdict */
+  .verdict {
+    margin: 50px 0;
+    background: linear-gradient(135deg, #1a1430, #161621, #142030);
+    border: 1px solid var(--accent2);
+    border-radius: 16px;
+    padding: 30px 28px;
+    text-align: center;
+  }
+  .verdict h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    margin-bottom: 14px;
+    color: var(--accent);
+  }
+  .verdict p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .verdict .pick {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* Action plan */
+  .timeline {
+    margin: 50px 0 60px;
+  }
+  .timeline h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .timeline-items {
+    position: relative;
+    padding-left: 28px;
+  }
+  .timeline-items::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 4px;
+    bottom: 4px;
+    width: 2px;
+    background: var(--border);
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 18px;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    top: 7px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent2);
+    border: 2px solid var(--accent);
+  }
+  .tl-date { font-size: 12px; color: var(--accent); font-weight: 600; }
+  .tl-text { font-size: 14px; color: var(--muted); margin-top: 2px; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 30px 20px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .footer .heart { color: var(--rose); }
+
+  /* Color themes per category */
+  .cat-practical .category-icon { background: linear-gradient(135deg, #1a3a2a, #2a4a3a); }
+  .cat-practical h2 { color: var(--mint); }
+  .cat-practical .car-price { color: var(--mint); }
+
+  .cat-luxury .category-icon { background: linear-gradient(135deg, #3a2a1a, #4a3a2a); }
+  .cat-luxury h2 { color: var(--gold); }
+  .cat-luxury .car-price { color: var(--gold); }
+
+  .cat-head .category-icon { background: linear-gradient(135deg, #2a1a3a, #3a2a4a); }
+  .cat-head h2 { color: var(--accent); }
+  .cat-head .car-price { color: var(--accent); }
+
+  .cat-safe .category-icon { background: linear-gradient(135deg, #1a2a3a, #2a3a4a); }
+  .cat-safe h2 { color: var(--sky); }
+  .cat-safe .car-price { color: var(--sky); }
+
+  .cat-wild .category-icon { background: linear-gradient(135deg, #3a1a2a, #4a2a3a); }
+  .cat-wild h2 { color: var(--rose); }
+  .cat-wild .car-price { color: var(--rose); }
+
+  /* Quick action panels */
+  .action-panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 50px 0;
+  }
+  .action-panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 20px;
+  }
+  .action-panel h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    margin-bottom: 6px;
+  }
+  .action-panel p {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .action-panel .action-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .action-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: #1e1e32;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .action-btn:hover {
+    background: #2a2a44;
+    border-color: var(--accent2);
+    transform: translateX(4px);
+  }
+  .action-btn .ab-icon { font-size: 20px; flex-shrink: 0; }
+  .action-btn .ab-label { flex: 1; }
+  .action-btn .ab-sub { font-size: 11px; color: var(--muted); font-weight: 400; }
+  .action-btn .ab-arrow { color: var(--muted); }
+
+  .panel-test h3 { color: var(--mint); }
+  .panel-test .action-btn:hover { border-color: #2a6a4a; }
+  .panel-loan h3 { color: var(--gold); }
+  .panel-loan .action-btn:hover { border-color: #6a5a2a; }
+
+  @media (max-width: 600px) { .action-panels { grid-template-columns: 1fr; } }
+
+  @media (max-width: 500px) {
+    .category-rationale { padding-left: 0; margin-top: 8px; }
+    .car-card { padding: 16px; }
+    .maint-section { padding: 20px 16px; }
+    .maint-table { font-size: 12px; }
+    .maint-table th, .maint-table td { padding: 8px 6px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-label">Curated for Emily</div>
+  <h1>Our Next SUV</h1>
+  <p>A shortlist of the best second-hand SUVs in Mumbai, researched and organized so we can pick the perfect one together.</p>
+  <div class="budget-badge">Budget: EMI &#8377;50,000 - 60,000/month</div>
+  <div class="deadline">Deadline: April 20, 2026</div>
+</section>
+
+<div class="container">
+
+  <!-- Category 1: Best Value -->
+  <section class="category cat-practical">
+    <div class="category-header">
+      <div class="category-icon">&#9889;</div>
+      <h2>Best Value for Money</h2>
+    </div>
+    <p class="category-rationale">
+      Maximum features, space, and capability per rupee. These SUVs punch way above their price — you get what a &#8377;45L+ new car offers, at half the cost. Perfect if we want a fully loaded SUV without overspending.
+    </p>
+    <div class="car-grid">
+
+      <div class="car-card">
+        <div class="car-top">
+          <div>
+            <div class="car-name">Mahindra XUV700 AX7 Diesel AT</div>
+            <div class="car-year">2022 - 2023 models</div>
+          </div>
+          <div class="car-price">&#8377;18 - 25L</div>
+        </div>
+        <p class="car-desc">The feature king — ADAS (auto emergency braking, lane keep), panoramic sunroof, 7 seats, powerful diesel engine. Fits comfortably in &#8377;50K EMI. Best value SUV in India right now.</p>
+        <div class="car-tags">
+          <span class="tag tag-pro">7 Seater</span>
+          <span class="tag tag-pro">ADAS Safety</span>
+          <span class="tag tag-pro">Sunroof</span>
+          <span class="tag tag-pro">Lowest EMI</span>
+          <span class="tag tag-con">Service wait times</span>
+        </div>
+        <div class="car-links">
+          <a class="car-link" href="https://www.cars24.com/buy-used-mahindra-xuv700-cars-mumbai/" target="_blank">Cars24</a>
+          <a class="car-link" href="https://www.spinny.com/used-xuv700-cars-in-mumbai/s/" target="_blank">Spinny</a>
+          <a class="car-link" href="https://www.cardekho.com/used-mahindra-xuv700+cars+in+mumbai" target="_blank">CarDekho</a>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <div class="car-top">
+          <div>
+            <div class="car-name">Hyundai Tucson Diesel 4WD</div>
+            <div class="car-year">2022 - 2023 models</div>
+          </div>
+          <div class="car-price">&#8377;20 - 28L</div>
+        </div>
+        <p class="car-desc">Feels like a &#8377;40L car inside — gorgeous design, 182 bhp diesel, all-wheel drive, ventilated seats, full digital cockpit. Premium without the luxury car maintenance bill.</p>
+        <div class="car-tags">
+          <span class="tag tag-pro">Premium Interior</span>
+          <span class="tag tag-pro">4WD Available</span>
+          <span class="tag tag-pro">Hyundai Reliability</span>
+          <span class="tag tag-con">5 Seater Only</span>
+        </div>
+        <div class="car-links">
+          <a class="car-link" href="https://www.cars24.com/buy-used-hyundai-tucson-cars-mumbai/" target="_blank">Cars24</a>
+          <a class="car-link" href="https://www.spinny.com/used-tucson-cars-in-mumbai/s/" target="_blank">Spinny</a>
+          <a class="car-link" href="https://www.cardekho.com/used-hyundai-tucson+cars+in+mumbai" target="_blank">CarDekho</a>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <div class="car-top">
+          <div>
+            <div class="car-name">Tata Safari / Harrier</div>
+            <div class="car-year">2022 - 2023 models</div>
+          </div>
+          <div class="car-price">&#8377;16 - 24L</div>
+        </div>
+        <p class="car-desc">Solid, handsome SUVs built on a Land Rover platform. Safari gives you 7 seats, great highway ride, and a commanding road presence. Most affordable entry into a proper full-size SUV.</p>
+        <div class="car-tags">
+          <span class="tag tag-pro">7 Seater (Safari)</span>
+          <span class="tag tag-pro">Land Rover Platform</span>
+          <span class="tag tag-pro">Great Highway Ride</span>
+          <span class="tag tag-con">Diesel Only</span>
+        </div>
+        <div class="car-links">
+          <a class="car-link" href="https://www.cars24.com/buy-used-tata-safari-cars-mumbai/" target="_blank">Cars24</a>
+          <a class="car-link" href="https://www.spinny.com/used-safari-cars-in-mumbai/s/" target="_blank">Spinny</a>
+          <a class="car-link" href="https://www.cardekho.com/used-tata-safari+cars+in+mumbai" target="_blank">CarDekho</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Category 2: Luxury -->
+  <section class="category cat-luxury">
+    <div class="category-header">
+      <div class="category-icon">&#10024;</div>
+      <h2>Luxury Experience</h2>
+    </div>
+    <p class="category-rationale">
+      The badge, the interiors, the feeling when you step in. Used luxury SUVs depreciate fast — which means we get a car that was &#8377;60-80L new, for half the price. The trade-off? Higher maintenance (&#8377;5-8K/month extra). Worth it if we value the premium experience.
+    </p>
+    <div class="car-grid">
+
+      <div class="car-card">
+        <div class="car-top">
+          <div>
+            <div class="car-name">Mercedes-Benz GLA 220d</div>
+            <div class="car-year">2021 - 2022 models</div>
+          </div>
+          <div class="car-price">&#8377;22 - 28L</div>
+        </div>
+        <p class="car-desc">Compact luxury SUV perfect for Mumbai — easy to park, refined diesel, gorgeous cabin with ambient lighting. Mercedes badge with manageable maintenance costs compared to bigger models.</p>
+        <div class="car-tags">
+          <span class="tag tag-pro">Mercedes Badge</span>
+          <span class="tag tag-pro">City-Friendly Size</span>
+          <span class="tag tag-pro">Refined Cabin</span>
+          <span class="tag tag-info">Maintenance ~&#8377;60-90K/yr</span>
+        </div>
+        <div class="car-links">
+          <a class="car-link" href="https://www.cars24.com/buy-used-mercedes-benz-gla-class-cars-mumbai/" target="_blank">Cars24</a>
+          <a class="car-link" href="https://www.spinny.com/used-gla-cars-in-mumbai/s/" target="_blank">Spinny</a>
+          <a class="car-link" href="https://www.carwale.com/used/mumbai/mercedes-benz-gla/" target="_blank">CarWale</a>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <div class="car-top">
+          <div>
+            <div class="car-name">Mercedes-Benz GLC 220d</div>
+            <div class="car-year">2018 - 2020 models</div>
+          </div>
+          <div class="car-price">&#8377;25 - 35L</div>
+        </div>
+        <p class="car-desc">The sweet spot of Mercedes SUVs — proper mid-size, spacious back seat, smooth ride, powerful diesel. 45 units currently available in Mumbai. The one to beat in this category.</p>
+        <div class="car-tags">
+          <span class="tag tag-pro">45 Available in Mumbai</span>
+          <span class="tag tag-pro">Perfect Size</span>
+          <span class="tag tag-pro">Smooth Ride</span>
+          <span class="tag tag-info">Maintenance ~&#8377;60-90K/yr</span>
+        </div>
+        <div class="car-links">
+          <a class="car-link" href="https://www.cars24.com/buy-used-mercedes-benz-glc-class-cars-mumbai/" target="_blank">Cars24</a>
+          <a class="car-link" href="https://www.carwale.com/used/mumbai/mercedes-benz-glc/" target="_blank">CarWale</a>
+          <a class="car-link" href="https://www.cardekho.com/used-mercedes-benz+glc+cars+in+mumbai" target="_blank">CarDekho</a>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <div class="car-top">
+          <div>
+            <div class="car-name">BMW X3 xDrive20d</div>
+            <div class="car-year">2019 - 2021 models</div>
+          </div>
+          <div class="car-price">&#8377;25 - 35L</div>
+        </div>
+        <p class="car-desc">The driver's choice — most fun-to-drive SUV on this list. Punchy diesel, sharp handling, spacious cabin. If driving pleasure matters as much as comfort, this is the one.</p>
+        <div class="car-tags">
+          <span class="tag tag-pro">Best to Drive</span>
+          <span class="tag tag-pro">Spacious</span>
+          <span class="tag tag-pro">Strong Diesel</span>
+          <span class="tag tag-info">Maintenance ~&#8377;40-70K/yr</span>
+        </div>
+        <div class="car-links">
+          <a class="car-link" href="https://www.cars24.com/buy-used-bmw-x3-cars-mumbai/" target="_blank">Cars24</a>
+          <a class="car-link" href="https://www.spinny.com/used-x3-cars-in-mumbai/s/" target="_blank">Spinny</a>
+          <a class="car-link" href="https://www.carwale.com/used/mumbai/bmw-x3/" target="_blank">CarWale</a>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <div class="car-top">
+          <div>
+            <div class="car-name">Audi Q5</div>
+            <div class="car-year">2019 - 2021 models</div>
+          </div>
+          <div class="car-price">&#8377;22 - 30L</div>
+        </div>
+        <p class="car-desc">Understated luxury — Quattro AWD, refined cabin, great build quality. Less flashy than Mercedes/BMW but arguably better built. Virtual cockpit is stunning.</p>
+        <div class="car-tags">
+          <span class="tag tag-pro">Quattro AWD</span>
+          <span class="tag tag-pro">Great Build Quality</span>
+          <span class="tag tag-pro">Understated Design</span>
+          <span class="tag tag-info">Maintenance ~&#8377;30-60K/yr</span>
+        </div>
+        <div class="car-links">
+          <a class="car-link" href="https://www.cars24.com/buy-used-audi-q5-cars-mumbai/" target="_blank">Cars24</a>
+          <a class="car-link" href="https://www.spinny.com/used-q5-cars-in-mumbai/s/" target="_blank">Spinny</a>
+          <a class="car-link" href="https://www.carwale.com/used/mumbai/audi-q5/" target="_blank">CarWale</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Category 3: Head Turners -->
+  <section class="category cat-head">
+    <div class="category-header">
+      <div class="category-icon">&#128171;</div>
+      <h2>Head Turners</h2>
+    </div>
+    <p class="category-rationale">
+      Cars that make people look twice. These have road presence, style, and the "wow" factor. If we want something that stands out in a Mumbai parking lot — these are it.
+    </p>
+    <div class="car-grid">
+
+      <div class="car-card">
+        <div class="car-top">
+          <div>
+            <div class="car-name">Toyota Fortuner Legender</div>
+            <div class="car-year">2020 - 2022 models</div>
+          </div>
+          <div class="car-price">&#8377;30 - 38L</div>
+        </div>
+        <p class="car-desc">The "King of SUVs" in India. Massive presence, bulletproof Toyota reliability, amazing resale value — you'll lose the least money when selling. The Legender variant looks sharp in white with the sporty front.</p>
+        <div class="car-tags">
+          <span class="tag tag-pro">Best Resale Value</span>
+          <span class="tag tag-pro">Toyota Reliability</span>
+          <span class="tag tag-pro">Commanding Presence</span>
+          <span class="tag tag-con">Top of Budget</span>
+        </div>
+        <div class="car-links">
+          <a class="car-link" href="https://www.cars24.com/buy-used-toyota-fortuner-cars-mumbai/" target="_blank">Cars24</a>
+          <a class="car-link" href="https://www.spinny.com/used-fortuner-cars-in-mumbai/s/" target="_blank">Spinny</a>
+          <a class="car-link" href="https://www.carwale.com/used/mumbai/toyota-fortuner/" target="_blank">CarWale (116 listed!)</a>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <div class="car-top">
+          <div>
+            <div class="car-name">Jeep Compass Diesel 4x4</div>
+            <div class="car-year">2021 - 2023 models</div>
+          </div>
+          <div class="car-price">&#8377;18 - 25L</div>
+        </div>
+        <p class="car-desc">That iconic Jeep look. Genuinely capable off-road, great highway cruiser, solid diesel engine. Turns heads with the 7-slot grille. One of the most stylish SUVs on the road.</p>
+        <div class="car-tags">
+          <span class="tag tag-pro">Iconic Design</span>
+          <span class="tag tag-pro">True 4x4</span>
+          <span class="tag tag-pro">Fun to Drive</span>
+          <span class="tag tag-con">Weaker Service Network</span>
+        </div>
+        <div class="car-links">
+          <a class="car-link" href="https://www.cars24.com/buy-used-jeep-compass-cars-mumbai/" target="_blank">Cars24</a>
+          <a class="car-link" href="https://www.spinny.com/used-compass-cars-in-mumbai/s/" target="_blank">Spinny</a>
+          <a class="car-link" href="https://www.cardekho.com/used-jeep-compass+cars+in+mumbai" target="_blank">CarDekho</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Category 4: Safest & Smartest -->
+  <section class="category cat-safe">
+    <div class="category-header">
+      <div class="category-icon">&#128737;</div>
+      <h2>Safest & Smartest Picks</h2>
+    </div>
+    <p class="category-rationale">
+      Minimum headaches, maximum peace of mind. These are the cars where reliability, low maintenance, and safety scores are the top priority. Buy it, drive it, forget about workshop visits.
+    </p>
+    <div class="car-grid">
+
+      <div class="car-card">
+        <div class="car-top">
+          <div>
+            <div class="car-name">Lexus NX 300h Hybrid</div>
+            <div class="car-year">2018 - 2020 models</div>
+          </div>
+          <div class="car-price">&#8377;27 - 36L</div>
+        </div>
+        <p class="car-desc">Toyota's luxury brand = legendary reliability with zero compromises on luxury. Hybrid powertrain saves fuel in Mumbai traffic. Lowest maintenance cost of ANY luxury brand. Only ~15 units in Mumbai so act fast.</p>
+        <div class="car-tags">
+          <span class="tag tag-pro">Toyota Reliability</span>
+          <span class="tag tag-pro">Hybrid / Fuel Saver</span>
+          <span class="tag tag-pro">Cheapest Luxury Maintenance</span>
+          <span class="tag tag-con">Limited Stock (~15 units)</span>
+        </div>
+        <div class="car-links">
+          <a class="car-link" href="https://www.carwale.com/used/mumbai/lexus-nx/" target="_blank">CarWale</a>
+          <a class="car-link" href="https://www.cardekho.com/used-lexus+nx+cars+in+mumbai" target="_blank">CarDekho</a>
+          <a class="car-link" href="https://www.cartrade.com/second-hand/mumbai/lexus/" target="_blank">CarTrade</a>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <div class="car-top">
+          <div>
+            <div class="car-name">Volvo XC60</div>
+            <div class="car-year">2019 - 2021 models</div>
+          </div>
+          <div class="car-price">&#8377;28 - 35L</div>
+        </div>
+        <p class="car-desc">Literally the safest car you can buy — Volvo invented the seatbelt and their safety tech is unmatched. Scandinavian minimalist interior is gorgeous. Massively underrated in India, which means great prices in the used market.</p>
+        <div class="car-tags">
+          <span class="tag tag-pro">Safest Brand in the World</span>
+          <span class="tag tag-pro">Beautiful Interior</span>
+          <span class="tag tag-pro">Underrated = Good Prices</span>
+          <span class="tag tag-con">Parts Availability Slower</span>
+        </div>
+        <div class="car-links">
+          <a class="car-link" href="https://www.cars24.com/buy-used-volvo-xc60-cars-mumbai/" target="_blank">Cars24</a>
+          <a class="car-link" href="https://www.carwale.com/used/mumbai/volvo-xc60/" target="_blank">CarWale</a>
+          <a class="car-link" href="https://www.cardekho.com/used-volvo+xc60+cars+in+mumbai" target="_blank">CarDekho</a>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <div class="car-top">
+          <div>
+            <div class="car-name">Toyota Innova Crysta / Hycross</div>
+            <div class="car-year">2021 - 2023 models</div>
+          </div>
+          <div class="car-price">&#8377;18 - 28L</div>
+        </div>
+        <p class="car-desc">Not technically an SUV but had to include it — Toyota reliability is unmatched, 7/8 seats with massive space, legendary comfort on long drives. The most stress-free ownership experience in India.</p>
+        <div class="car-tags">
+          <span class="tag tag-pro">Bulletproof Reliability</span>
+          <span class="tag tag-pro">7-8 Seats</span>
+          <span class="tag tag-pro">Great Resale</span>
+          <span class="tag tag-info">MPV, not SUV</span>
+        </div>
+        <div class="car-links">
+          <a class="car-link" href="https://www.cars24.com/buy-used-toyota-innova-crysta-cars-mumbai/" target="_blank">Cars24</a>
+          <a class="car-link" href="https://www.spinny.com/used-innova-crysta-cars-in-mumbai/s/" target="_blank">Spinny</a>
+          <a class="car-link" href="https://www.carwale.com/used/mumbai/toyota-innova-crysta/" target="_blank">CarWale</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Category 5: Wild Cards -->
+  <section class="category cat-wild">
+    <div class="category-header">
+      <div class="category-icon">&#127183;</div>
+      <h2>Wild Cards</h2>
+    </div>
+    <p class="category-rationale">
+      A bit unconventional, but worth a test drive — these might surprise us.
+    </p>
+    <div class="car-grid">
+
+      <div class="car-card">
+        <div class="car-top">
+          <div>
+            <div class="car-name">BMW X1</div>
+            <div class="car-year">2020 - 2022 models</div>
+          </div>
+          <div class="car-price">&#8377;18 - 25L</div>
+        </div>
+        <p class="car-desc">Entry luxury that doesn't feel entry-level. Great to drive, compact for city use, BMW badge. Lowest maintenance cost among German luxury SUVs.</p>
+        <div class="car-tags">
+          <span class="tag tag-pro">Compact & Fun</span>
+          <span class="tag tag-pro">Affordable Luxury</span>
+          <span class="tag tag-con">Smaller Boot</span>
+        </div>
+        <div class="car-links">
+          <a class="car-link" href="https://www.cars24.com/buy-used-bmw-x1-cars-mumbai/" target="_blank">Cars24</a>
+          <a class="car-link" href="https://www.spinny.com/used-x1-cars-in-mumbai/s/" target="_blank">Spinny</a>
+          <a class="car-link" href="https://www.carwale.com/used/mumbai/bmw-x1/" target="_blank">CarWale</a>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <div class="car-top">
+          <div>
+            <div class="car-name">Mahindra Scorpio N Z8L</div>
+            <div class="car-year">2022 - 2023 models</div>
+          </div>
+          <div class="car-price">&#8377;15 - 22L</div>
+        </div>
+        <p class="car-desc">The rugged charmer — body-on-frame construction, 4WD, great for Mumbai-to-Goa highway blasts. Leaves room in the budget for accessories or a lower EMI.</p>
+        <div class="car-tags">
+          <span class="tag tag-pro">Rugged & Tough</span>
+          <span class="tag tag-pro">4WD Available</span>
+          <span class="tag tag-pro">Lowest Budget</span>
+          <span class="tag tag-con">Slightly Rough Ride</span>
+        </div>
+        <div class="car-links">
+          <a class="car-link" href="https://www.cars24.com/buy-used-mahindra-scorpio-n-cars-mumbai/" target="_blank">Cars24</a>
+          <a class="car-link" href="https://www.spinny.com/used-scorpio-n-cars-in-mumbai/s/" target="_blank">Spinny</a>
+          <a class="car-link" href="https://www.cardekho.com/used-mahindra-scorpio-n+cars+in+mumbai" target="_blank">CarDekho</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Maintenance comparison -->
+  <section class="maint-section">
+    <h2>Annual Maintenance Reality Check</h2>
+    <table class="maint-table">
+      <thead>
+        <tr>
+          <th>Brand</th>
+          <th>Annual Service Cost</th>
+          <th>Surprise Repairs</th>
+          <th>Verdict</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Lexus</td>
+          <td class="cost-low">&#8377;20 - 35K</td>
+          <td class="cost-low">Rare</td>
+          <td class="cost-low">Easiest to own</td>
+        </tr>
+        <tr>
+          <td>Toyota</td>
+          <td class="cost-low">&#8377;15 - 30K</td>
+          <td class="cost-low">Very Rare</td>
+          <td class="cost-low">Cheapest to own</td>
+        </tr>
+        <tr>
+          <td>Hyundai / Mahindra / Tata</td>
+          <td class="cost-low">&#8377;10 - 25K</td>
+          <td class="cost-med">Occasional</td>
+          <td class="cost-low">Very affordable</td>
+        </tr>
+        <tr>
+          <td>Volvo</td>
+          <td class="cost-med">&#8377;40 - 60K</td>
+          <td class="cost-med">Moderate</td>
+          <td class="cost-med">Manageable</td>
+        </tr>
+        <tr>
+          <td>Audi</td>
+          <td class="cost-med">&#8377;30 - 60K</td>
+          <td class="cost-med">DSG gearbox risk</td>
+          <td class="cost-med">Moderate</td>
+        </tr>
+        <tr>
+          <td>BMW</td>
+          <td class="cost-high">&#8377;40 - 70K</td>
+          <td class="cost-high">Common after 4 yrs</td>
+          <td class="cost-med">Budget &#8377;5K/mo extra</td>
+        </tr>
+        <tr>
+          <td>Mercedes</td>
+          <td class="cost-high">&#8377;60 - 90K</td>
+          <td class="cost-high">Electronics costly</td>
+          <td class="cost-high">Budget &#8377;7K/mo extra</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Our Pick -->
+  <section class="verdict">
+    <h2>The Top 3 to Test Drive First</h2>
+    <p>
+      <span class="pick">1. Lexus NX 300h</span> — Luxury + Toyota reliability + hybrid. If we find one in Mumbai, grab it.<br><br>
+      <span class="pick">2. Hyundai Tucson 4WD</span> — Looks &#8377;40L, costs &#8377;24L, reliable brand. Best of both worlds.<br><br>
+      <span class="pick">3. Mercedes GLC 220d</span> — If we want the badge and the experience, this is the one. 45 units available right now.
+    </p>
+  </section>
+
+  <!-- Quick Action Panels -->
+  <div class="action-panels">
+
+    <!-- Test Drive Panel (for Emily) -->
+    <div class="action-panel panel-test">
+      <h3>Book a Test Drive</h3>
+      <p>Spinny does free home test drives! Cars24 has hubs across Mumbai. Pick a car above and book in 2 minutes.</p>
+      <div class="action-links">
+        <a class="action-btn" href="https://www.spinny.com/used-cars-in-mumbai/s/" target="_blank">
+          <span class="ab-icon">&#128663;</span>
+          <span class="ab-label">Spinny <br><span class="ab-sub">Home test drive &middot; 5-day return policy</span></span>
+          <span class="ab-arrow">&#8594;</span>
+        </a>
+        <a class="action-btn" href="https://www.cars24.com/buy-used-suv-cars-mumbai/" target="_blank">
+          <span class="ab-icon">&#127951;</span>
+          <span class="ab-label">Cars24 Mumbai Hubs <br><span class="ab-sub">Walk-in test drive &middot; Multiple locations</span></span>
+          <span class="ab-arrow">&#8594;</span>
+        </a>
+        <a class="action-btn" href="https://www.carwale.com/used/mumbai/" target="_blank">
+          <span class="ab-icon">&#128270;</span>
+          <span class="ab-label">CarWale <br><span class="ab-sub">Dealer listings &middot; Schedule via dealer</span></span>
+          <span class="ab-arrow">&#8594;</span>
+        </a>
+        <a class="action-btn" href="https://www.spinny.com/used-luxury-suv-cars-in-mumbai/s/" target="_blank">
+          <span class="ab-icon">&#10024;</span>
+          <span class="ab-label">Spinny Luxury SUVs <br><span class="ab-sub">Mercedes, BMW, Lexus, Audi, Volvo</span></span>
+          <span class="ab-arrow">&#8594;</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Loan Panel -->
+    <div class="action-panel panel-loan">
+      <h3>Apply for Car Loan</h3>
+      <p>Get pre-approved before you finalize — strengthens your negotiation. Target: &#8377;50-60K EMI, 5 year tenure.</p>
+      <div class="action-links">
+        <a class="action-btn" href="https://www.sbi.co.in/web/personal-banking/loans/auto-loans/certified-pre-owned-car-loan" target="_blank">
+          <span class="ab-icon">&#127963;</span>
+          <span class="ab-label">SBI Used Car Loan <br><span class="ab-sub">From 9.1% &middot; Up to 85% financing</span></span>
+          <span class="ab-arrow">&#8594;</span>
+        </a>
+        <a class="action-btn" href="https://www.hdfcbank.com/personal/borrow/popular-loans/car-loan/used-car-loan" target="_blank">
+          <span class="ab-icon">&#127963;</span>
+          <span class="ab-label">HDFC Used Car Loan <br><span class="ab-sub">Quick approval &middot; Flexible tenure</span></span>
+          <span class="ab-arrow">&#8594;</span>
+        </a>
+        <a class="action-btn" href="https://www.bajajfinserv.in/used-car-loan" target="_blank">
+          <span class="ab-icon">&#9889;</span>
+          <span class="ab-label">Bajaj Finserv <br><span class="ab-sub">Instant pre-approval &middot; Low documentation</span></span>
+          <span class="ab-arrow">&#8594;</span>
+        </a>
+        <a class="action-btn" href="https://www.cardekho.com/car-loan-emi-calculator.htm" target="_blank">
+          <span class="ab-icon">&#129518;</span>
+          <span class="ab-label">EMI Calculator <br><span class="ab-sub">Check exact EMI for any car price</span></span>
+          <span class="ab-arrow">&#8594;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Timeline -->
+  <section class="timeline">
+    <h2>Action Plan to April 20</h2>
+    <div class="timeline-items">
+      <div class="tl-item">
+        <div class="tl-date">March 10 - 16</div>
+        <div class="tl-text">Browse this list together, shortlist 2-3 favorites</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">March 17 - 23</div>
+        <div class="tl-text">Book test drives on Spinny (they do home test drives!) & Cars24</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">March 24 - 31</div>
+        <div class="tl-text">Get loan pre-approved (SBI / HDFC / Cars24 in-house finance)</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">April 1 - 10</div>
+        <div class="tl-text">Final test drives, negotiate price, pick the one</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">April 10 - 20</div>
+        <div class="tl-text">Close deal, complete RC transfer, drive home!</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+  Made with <span class="heart">&hearts;</span> for Emily &middot; Mumbai SUV Guide 2026
+</footer>
+
+</body>
+</html>
