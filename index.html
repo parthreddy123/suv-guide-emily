@@ -85,9 +85,9 @@
   .category-toggle {
     width: 100%;
     display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 18px 20px;
+    flex-direction: column;
+    gap: 0;
+    padding: 20px 22px;
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 14px;
@@ -100,6 +100,12 @@
   .category-toggle:hover { background: var(--card-hover); border-color: var(--accent2); }
   .category-toggle.active { border-radius: 14px 14px 0 0; border-bottom-color: transparent; }
 
+  .cat-top-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+  }
   .category-icon {
     width: 44px; height: 44px;
     border-radius: 12px;
@@ -113,13 +119,6 @@
     font-weight: 600;
     flex: 1;
   }
-  .category-count {
-    font-size: 12px;
-    color: var(--muted);
-    background: #222;
-    padding: 3px 10px;
-    border-radius: 12px;
-  }
   .category-arrow {
     font-size: 18px;
     color: var(--muted);
@@ -127,6 +126,44 @@
     flex-shrink: 0;
   }
   .category-toggle.active .category-arrow { transform: rotate(180deg); }
+
+  .cat-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    width: 100%;
+  }
+  .cat-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background: rgba(255,255,255,0.03);
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.05);
+    flex: 1;
+    min-width: 100px;
+  }
+  .cat-stat-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .cat-stat-value {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .cat-cars-preview {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--muted);
+    width: 100%;
+  }
 
   .category-body {
     display: none;
@@ -377,10 +414,18 @@
   <!-- Category 1: Under 50K EMI — Great Value -->
   <section class="category cat-practical">
     <button class="category-toggle" onclick="toggleCategory(this)">
-      <div class="category-icon">&#9889;</div>
-      <h2>Under &#8377;50K EMI — Great Value</h2>
-      <span class="category-count">3 cars</span>
-      <span class="category-arrow">&#9660;</span>
+      <div class="cat-top-row">
+        <div class="category-icon">&#9889;</div>
+        <h2>Under &#8377;50K EMI — Great Value</h2>
+        <span class="category-arrow">&#9660;</span>
+      </div>
+      <div class="cat-stats">
+        <div class="cat-stat"><span class="cat-stat-label">EMI Range</span><span class="cat-stat-value" style="color:var(--mint)">&#8377;35K - 54K</span></div>
+        <div class="cat-stat"><span class="cat-stat-label">Price Range</span><span class="cat-stat-value">&#8377;18 - 28L</span></div>
+        <div class="cat-stat"><span class="cat-stat-label">Maintenance</span><span class="cat-stat-value" style="color:var(--mint)">&#8377;10 - 25K/yr</span></div>
+        <div class="cat-stat"><span class="cat-stat-label">Best For</span><span class="cat-stat-value">Features & Savings</span></div>
+      </div>
+      <div class="cat-cars-preview">Tucson &middot; XUV700 &middot; Compass</div>
     </button>
     <div class="category-body">
       <div class="category-rationale">
@@ -480,10 +525,18 @@
   <!-- Category 2: Luxury Brands -->
   <section class="category cat-luxury">
     <button class="category-toggle" onclick="toggleCategory(this)">
-      <div class="category-icon">&#10024;</div>
-      <h2>Luxury Brands — Mercedes, BMW, Audi</h2>
-      <span class="category-count">3 cars</span>
-      <span class="category-arrow">&#9660;</span>
+      <div class="cat-top-row">
+        <div class="category-icon">&#10024;</div>
+        <h2>Luxury Brands — Mercedes, BMW, Audi</h2>
+        <span class="category-arrow">&#9660;</span>
+      </div>
+      <div class="cat-stats">
+        <div class="cat-stat"><span class="cat-stat-label">EMI Range</span><span class="cat-stat-value" style="color:var(--gold)">&#8377;42K - 67K</span></div>
+        <div class="cat-stat"><span class="cat-stat-label">Price Range</span><span class="cat-stat-value">&#8377;22 - 35L</span></div>
+        <div class="cat-stat"><span class="cat-stat-label">Maintenance</span><span class="cat-stat-value" style="color:var(--rose)">&#8377;30 - 90K/yr</span></div>
+        <div class="cat-stat"><span class="cat-stat-label">Best For</span><span class="cat-stat-value">Badge & Experience</span></div>
+      </div>
+      <div class="cat-cars-preview">Mercedes GLC &middot; BMW X3 &middot; Audi Q5</div>
     </button>
     <div class="category-body">
       <div class="category-rationale">
@@ -582,10 +635,18 @@
   <!-- Category 3: Safest & Smartest -->
   <section class="category cat-safe">
     <button class="category-toggle" onclick="toggleCategory(this)">
-      <div class="category-icon">&#128737;</div>
-      <h2>Zero-Stress Ownership — Lexus, Volvo</h2>
-      <span class="category-count">2 cars</span>
-      <span class="category-arrow">&#9660;</span>
+      <div class="cat-top-row">
+        <div class="category-icon">&#128737;</div>
+        <h2>Zero-Stress — Lexus, Volvo</h2>
+        <span class="category-arrow">&#9660;</span>
+      </div>
+      <div class="cat-stats">
+        <div class="cat-stat"><span class="cat-stat-label">EMI Range</span><span class="cat-stat-value" style="color:var(--sky)">&#8377;52K - 69K</span></div>
+        <div class="cat-stat"><span class="cat-stat-label">Price Range</span><span class="cat-stat-value">&#8377;27 - 36L</span></div>
+        <div class="cat-stat"><span class="cat-stat-label">Maintenance</span><span class="cat-stat-value" style="color:var(--mint)">&#8377;20 - 60K/yr</span></div>
+        <div class="cat-stat"><span class="cat-stat-label">Best For</span><span class="cat-stat-value">Reliability & Safety</span></div>
+      </div>
+      <div class="cat-cars-preview">Lexus NX 300h &middot; Volvo XC60</div>
     </button>
     <div class="category-body">
       <div class="category-rationale">
